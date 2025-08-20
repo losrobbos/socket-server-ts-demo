@@ -1,4 +1,4 @@
-# Plan Socket Server in TS
+# Socket Server in TS - der ultimative Plan
 
 - NPM Projekt initialisieren
 - TypeScript initialisieren
