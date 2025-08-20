@@ -1,8 +1,10 @@
 # Plan Socket Server in TS
 
-- X NPM Projekt initialisieren
+- NPM Projekt initialisieren
 - TypeScript initialisieren
-- Express => HTTP Server
-- Socket.io Server aufsetzen
-- Socket Channel auf
-- Terminal Client für Verbindungs-Test 
+- Express API aufsetzen
+- Socket.io Server aufsetzen (in Express HTTP Server "einhängen")
+- Socket Channel aufsetzen
+- Terminal Client für Verbindungs-Test
+- Nachricht an Server senden
+- Echo Nachricht von Server an Client zurücksenden 
