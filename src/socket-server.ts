@@ -33,6 +33,8 @@ io.on('connection', (socket) => {
     console.log('[SERVER] Message received:', msg);
     // Echo the message back to the client
     socket.emit("message", `Echo: ${msg}`);
+    // Broadcast to every other user in the room 
+    socket.broadcast.emit("message", socket.id + ": " + msg)
   });
 
   // Handle disconnection
