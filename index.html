@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket Client</title>
+</head>
+
+<body>
+
+  <h1>Das hier ist der schönste Socket Client, den Wladimir jemals zu sehen bekommen wird</h1>
+
+  <button id="connect">Connect</button>
+  <button id="emit">Emit Test Message</button>
+  <button id="disconnect">Disconnect</button>
+
+  <script type="module">
+
+    const log = console.log
+
+    import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
+
+    const SOCKET_SERVER_URL = 'http://localhost:3000'; // Adjust the URL as needed
+
+    /** @type {HTMLButtonElement}  */
+    const btnConnect = document.querySelector("button#connect")
+    const btnEmit = document.querySelector("button#emit")
+    const btnDisconnect = document.querySelector("button#disconnect")
+
+    let socket;
+
+    btnEmit.onclick = () => {
+      socket.emit("message", "Hello from the client!");
+    }
+    
+    btnDisconnect.onclick = () => {
+      socket.disconnect()
+    }
+
+    btnConnect.onclick = () => {
+
+      // connect to socket server
+      socket = io(SOCKET_SERVER_URL)
+
+      socket
+        .on("connect", () => {
+          console.log(`Connected to socket server at ${SOCKET_SERVER_URL}`);
+
+          // Listen for messages from the server
+          socket.on("message", (msg) => {
+            console.log("Message from server:", msg);
+          });
+        })
+        .on("disconnect", () => {
+          console.log("Disconnected from socket server");
+        })
+        .on("connect_error", (error) => {
+          console.error("Connection error:", error);
+        });
+    }
+
+
+  </script>
+
+</body>
+
+</html>
