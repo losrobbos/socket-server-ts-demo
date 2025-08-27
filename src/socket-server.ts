@@ -32,9 +32,13 @@ io.on('connection', (socket) => {
   socket.on("message", (msg) => {
     console.log('[SERVER] Message received:', msg);
     // Echo the message back to the client
-    socket.emit("message", `Echo: ${msg}`);
+    // socket.emit("message", `Echo: ${msg}`);
+
+    // this call makes a broadcast to EVERYONE in the current room
+    // under the hood this replaces the two separate calls to socket.emit (to sender only) and socket.broadcast.emit (to all other connected users)
+    io.emit("message", `Echo: ${msg}`);
     // Broadcast to every other user in the room 
-    socket.broadcast.emit("message", socket.id + ": " + msg)
+    // socket.broadcast.emit("message", socket.id + ": " + msg)
   });
 
   // Handle disconnection
