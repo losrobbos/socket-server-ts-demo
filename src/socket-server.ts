@@ -29,14 +29,14 @@ io.on('connection', (socket) => {
   console.log("[SERVER] A client connected:", socket.id);
 
   // server side message handling
-  socket.on("message", (msg) => {
-    console.log('[SERVER] Message received:', msg);
+  socket.on("message", ({ message, user, date }) => {
+    console.log('[SERVER] Message received:', message);
     // Echo the message back to the client
     // socket.emit("message", `Echo: ${msg}`);
 
     // this call makes a broadcast to EVERYONE in the current room
     // under the hood this replaces the two separate calls to socket.emit (to sender only) and socket.broadcast.emit (to all other connected users)
-    io.emit("message", `Echo: ${msg}`);
+    io.emit("message", { message, user, date });
     // Broadcast to every other user in the room 
     // socket.broadcast.emit("message", socket.id + ": " + msg)
   });
